@@ -11,6 +11,18 @@ export class App {
         route: [""],
         moduleId: PLATFORM.moduleName("./components/home"),
         title: "All Islands"
+      },
+      {
+        route: "poi",
+        moduleId: PLATFORM.moduleName("./components/poi-detail"),
+        name: "pois",
+        title: "Island"
+      },
+      {
+        route: "navigator",
+        moduleId: PLATFORM.moduleName("./components/navigator"),
+        name: "navigator",
+        title: "Navigtor"
       }
     ]);
   }
