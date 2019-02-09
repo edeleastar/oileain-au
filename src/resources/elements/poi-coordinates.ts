@@ -1,5 +1,6 @@
 import { bindable } from 'aurelia-framework';
+import {PointOfInterest} from '../../services/poi';
 
-export class PoiCoordinates {
-  @bindable title: string;
+export class  Coordinates {
+  @bindable poi: PointOfInterest;
 }

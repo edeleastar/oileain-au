@@ -26,6 +26,10 @@ export class Oileain {
     return this.coasts;
   }
 
+  async getIslandById (id : string) {
+    return await this.getIsland(this.islandMap.get(id))
+  }
+
   getIsland(poi: PointOfInterest) {
     let cachedPoi = this.islandMap.get(poi.safeName);
     if (cachedPoi.description) {
