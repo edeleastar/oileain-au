@@ -1,6 +1,8 @@
 <template>
-  <require from="../resources/elements/map-medium"></require>
-  <map-medium title.one-way="title"></map-medium>
+  <div class="uk-card uk-card-default uk-card-body">
+    <p> ${title} </p>
+    <div id="${mapId}" style="height:${mapHeight}px"></div>
+  </div>
   <div class="uk-card uk-card-default uk-card-body">
     <compose view-model="./poi-detail" model.bind="model"></compose>
   </div>

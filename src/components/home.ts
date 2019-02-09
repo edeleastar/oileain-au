@@ -1,11 +1,22 @@
-export class Home {
-  title: string;
+import { LeafletMap } from "../services/leaflet-map";
 
-  constructor() {
-    this.title = "Olieain Main View";
-  }
+export class Home {
+  title = "Olieain Main View";
+  mapId = "home-map-id";
+  mapHeight = 1200;
+  map: LeafletMap;
+
+  constructor() {}
 
   activate(params) {}
 
-  attached() {}
+  attached() {
+    this.map = new LeafletMap(
+      this.mapId,
+      { lat: 53.2734, long: -7.7783203 },
+      8,
+      7
+    );
+    this.map.addControl();
+  }
 }

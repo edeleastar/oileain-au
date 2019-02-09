@@ -1,11 +1,10 @@
 <template>
-  <require from="../resources/elements/map-medium"></require>
   <require from="../resources/elements/poi-coordinates"></require>
   <require from="../resources/elements/poi-description"></require>
 
   <div class="uk-text-center" uk-grid>
     <div class="uk-width-expand@m">
-      <map-medium title.one-way="title"></map-medium>
+      <div id="${mapId}" style="height:${mapHeight}px"></div>
       <poi-coordinates title.one-way="title"></poi-coordinates>
     </div>
     <div class="uk-width-1-3@m">
