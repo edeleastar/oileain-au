@@ -16,7 +16,7 @@ export class App {
         title: "All Islands"
       },
       {
-        route: "poi",
+        route: "poi/:id",
         moduleId: PLATFORM.moduleName("./components/poi-detail"),
         name: "pois",
         title: "Island"
