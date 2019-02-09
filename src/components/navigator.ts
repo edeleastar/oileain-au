@@ -1,10 +1,10 @@
-import { LeafletMap } from "../services/leaflet-map";
+import { LeafletMap } from '../services/leaflet-map';
 
 export class Navigator {
-  title = "Olieain Navigator View";
+  title = 'Olieain Navigator View';
 
   mapDescriptor = {
-    id: "nav-map-id",
+    id: 'nav-map-id',
     height: 200,
     location: { lat: 53.2734, long: -7.7783203 },
     zoom: 8,

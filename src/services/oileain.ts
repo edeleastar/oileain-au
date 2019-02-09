@@ -1,7 +1,7 @@
-import { inject } from "aurelia-framework";
-import { EventAggregator } from "aurelia-event-aggregator";
-import { Coast, PointOfInterest } from "./poi";
-import { HttpClient } from "aurelia-fetch-client";
+import { inject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
+import { Coast, PointOfInterest } from './poi';
+import { HttpClient } from 'aurelia-fetch-client';
 
 @inject(EventAggregator, HttpClient)
 export class Oileain {
@@ -19,34 +19,27 @@ export class Oileain {
 
   async getCoasts() {
     if (!this.coasts) {
-      const response  = await this.http.fetch("https://edeleastar.github.io/oileain-api/all-slim.json")
+      const response = await this.http.fetch('https://edeleastar.github.io/oileain-api/all-slim.json');
       this.coasts = await response.json();
       this.createIndexes();
     }
     return this.coasts;
   }
 
-  async getIslandById (id : string) {
-    return await this.getIsland(this.islandMap.get(id))
+  async getIslandById(id: string) {
+    return await this.getIsland(this.islandMap.get(id));
   }
 
-  getIsland(poi: PointOfInterest) {
+  async getIsland(poi: PointOfInterest) {
     let cachedPoi = this.islandMap.get(poi.safeName);
     if (cachedPoi.description) {
-      return new Promise((resolve, reject) => {
-        resolve(cachedPoi);
-      });
+      return cachedPoi;
     } else {
-      const path = `https://edeleastar.github.io/oileain-api/${
-        poi.coast.variable
-      }/${poi.safeName}.json`;
-      return this.http
-        .fetch(path)
-        .then(response => response.json())
-        .then(island => {
-          this.islandMap.set(poi.safeName, island);
-          return island;
-        });
+      const path = `https://edeleastar.github.io/oileain-api/${poi.coast.variable}/${poi.safeName}.json`;
+      const response = await this.http.fetch(path);
+      const island = await response.json();
+      this.islandMap.set(poi.safeName, island);
+      return island;
     }
   }
 

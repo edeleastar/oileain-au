@@ -1,19 +1,19 @@
-import { LeafletMap } from "../services/leaflet-map";
-import { Oileain } from "../services/oileain";
-import {PointOfInterest} from "../services/poi";
-import { inject } from "aurelia-framework";
+import { LeafletMap } from '../services/leaflet-map';
+import { Oileain } from '../services/oileain';
+import { PointOfInterest } from '../services/poi';
+import { inject } from 'aurelia-framework';
 
 @inject(Oileain)
 export class PoiDetail {
-  title = "Olieain POI View";
+  title = 'Olieain POI View';
 
   mapDescriptor = {
-    id: "poi-map-id",
+    id: 'poi-map-id',
     height: 300,
     location: { lat: 53.2734, long: -7.7783203 },
     zoom: 8,
     minZoom: 7,
-    activeLayer: "Satellite"
+    activeLayer: 'Satellite'
   };
   map: LeafletMap;
 
@@ -25,7 +25,7 @@ export class PoiDetail {
     this.poi = poi;
     this.title = poi.name;
     if (this.map) {
-      this.map.addPopup("Islands", poi.nameHtml, poi.coordinates.geo);
+      this.map.addPopup('Islands', poi.nameHtml, poi.coordinates.geo);
       this.map.moveTo(15, poi.coordinates.geo);
       this.map.invalidateSize();
     }
@@ -33,7 +33,7 @@ export class PoiDetail {
 
   async activate(params) {
     await this.oileain.getCoasts();
-    const poi  = await this.oileain.getIslandById(params.id);
+    const poi = await this.oileain.getIslandById(params.id);
     this.renderPoi(poi);
   }
 

@@ -1,6 +1,6 @@
 import { LeafletMap } from "../services/leaflet-map";
 import { Coast, PointOfInterest } from "../services/poi";
-import { inject } from "aurelia-framework";
+import { inject } from 'aurelia-framework';
 import { Oileain } from "../services/oileain";
 import * as L from "leaflet";
 import Marker = L.Marker;

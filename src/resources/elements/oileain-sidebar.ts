@@ -1,6 +1,6 @@
-import { Oileain } from "../../services/oileain";
-import { inject } from "aurelia-framework";
-import { Coast } from "../../services/poi";
+import { Oileain } from '../../services/oileain';
+import { inject } from 'aurelia-framework';
+import { Coast } from '../../services/poi';
 
 @inject(Oileain)
 export class OileainSidebar {
@@ -8,7 +8,7 @@ export class OileainSidebar {
   coasts: Array<Coast>;
 
   constructor(private oileain: Oileain) {
-    this.title = "Islands";
+    this.title = 'Islands';
     this.loadCoasts();
   }
 

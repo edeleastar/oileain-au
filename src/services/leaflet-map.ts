@@ -1,8 +1,8 @@
-import * as L from "leaflet";
+import * as L from 'leaflet';
 import Map = L.Map;
 import Layer = L.Layer;
 import LayersObject = L.Control.LayersObject;
-import { Geodetic } from "./poi";
+import { Geodetic } from './poi';
 import LayerGroup = L.LayerGroup;
 import LayerControl = L.Control.Layers;
 
@@ -24,15 +24,15 @@ export class LeafletMap {
             <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>`;
 
   mbUrl =
-    "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
+    'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
 
   baseLayers = {
     Terrain: L.tileLayer(this.mbUrl, {
-      id: "mapbox.outdoors",
+      id: 'mapbox.outdoors',
       attribution: this.mbAttr
     }),
     Satellite: L.tileLayer(this.mbUrl, {
-      id: "mapbox.satellite",
+      id: 'mapbox.satellite',
       attribution: this.mbAttr
     })
   };
@@ -62,9 +62,7 @@ export class LeafletMap {
   }
 
   addControl() {
-    this.control = L.control
-      .layers(this.baseLayers, this.overlays)
-      .addTo(this.imap);
+    this.control = L.control.layers(this.baseLayers, this.overlays).addTo(this.imap);
   }
 
   moveTo(zoom: number, location: Geodetic) {
