@@ -1,8 +1,8 @@
-export class Home {
+export class PoiDetail {
   title: string;
 
   constructor() {
-    this.title = "Olieain Main View";
+    this.title = "Olieain Detail View";
   }
 
   activate(params) {}

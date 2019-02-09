@@ -1,8 +1,8 @@
-export class Home {
+export class Navigator {
   title: string;
 
   constructor() {
-    this.title = "Olieain Main View";
+    this.title = "Olieain Navigator View";
   }
 
   activate(params) {}
