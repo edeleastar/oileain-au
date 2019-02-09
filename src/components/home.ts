@@ -1,5 +1,5 @@
 import { LeafletMap } from "../services/leaflet-map";
-import {Coast, PointOfInterest} from "../services/poi";
+import { Coast, PointOfInterest } from "../services/poi";
 import { inject } from "aurelia-framework";
 import { Oileain } from "../services/oileain";
 import * as L from "leaflet";
@@ -8,17 +8,23 @@ import Marker = L.Marker;
 @inject(Oileain)
 export class Home {
   title = "Olieain Main View";
-  mapId = "home-map-id";
-  mapHeight = 1200;
+
+  mapDescriptor = {
+    id: "home-map-id",
+    height: 1200,
+    location: { lat: 53.2734, long: -7.7783203 },
+    zoom: 8,
+    minZoom: 7,
+    activeLayer: ""
+  };
+
   map: LeafletMap;
   populated = false;
   markerMap = new Map<Marker, PointOfInterest>();
 
   coasts: Array<Coast>;
 
-  constructor(
-    private oileain: Oileain,
-  ) {}
+  constructor(private oileain: Oileain) {}
 
   populateCoast(coast: Coast) {
     let group = L.layerGroup([]);
@@ -33,7 +39,7 @@ export class Home {
       }).setContent(
         `<a href='#/poi/${poi.safeName}'>${
           poi.name
-          } <small>(click for details}</small></a>`
+        } <small>(click for details}</small></a>`
       );
       marker.bindPopup(newpopup);
       marker.addTo(group);
@@ -60,15 +66,8 @@ export class Home {
     });
   }
 
-
   attached() {
-    this.map = new LeafletMap(
-      this.mapId,
-      { lat: 53.2734, long: -7.7783203 },
-      8,
-      7
-    );
-    this.map.addControl();
+    this.map = new LeafletMap(this.mapDescriptor);
     if (this.coasts) {
       this.populateCoasts(this.coasts);
     }

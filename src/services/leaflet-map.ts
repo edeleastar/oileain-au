@@ -6,6 +6,15 @@ import { Geodetic } from "./poi";
 import LayerGroup = L.LayerGroup;
 import LayerControl = L.Control.Layers;
 
+export interface LeafletMapDescriptor {
+  id: string;
+  height: number;
+  location: Geodetic;
+  zoom: number;
+  minZoom: number;
+  activeLayer: string;
+}
+
 export class LeafletMap {
   imap: Map;
   populated = false;
@@ -28,23 +37,18 @@ export class LeafletMap {
     })
   };
 
-  constructor(
-    id: string,
-    location: Geodetic,
-    zoom: number,
-    minZoom: number,
-    activeLayer: string = ""
-  ) {
+  constructor(descriptor: LeafletMapDescriptor) {
     let defaultLayer = this.baseLayers.Terrain;
-    if (activeLayer) {
-      defaultLayer = this.baseLayers[activeLayer];
+    if (descriptor.activeLayer) {
+      defaultLayer = this.baseLayers[descriptor.activeLayer];
     }
-    this.imap = L.map(id, {
-      center: [location.lat, location.long],
-      zoom: zoom,
-      minZoom: minZoom,
+    this.imap = L.map(descriptor.id, {
+      center: [descriptor.location.lat, descriptor.location.long],
+      zoom: descriptor.zoom,
+      minZoom: descriptor.minZoom,
       layers: [defaultLayer]
     });
+    this.addControl();
   }
 
   addLayer(title: string, layer: Layer) {
@@ -91,7 +95,7 @@ export class LeafletMap {
   }
 
   invalidateSize() {
-    this.imap.invalidateSize();;
+    this.imap.invalidateSize();
     let hiddenMethodMap = this.imap as any;
     hiddenMethodMap._onResize();
   }
