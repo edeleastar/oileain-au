@@ -2,15 +2,18 @@
   <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
     <div class="uk-offcanvas-bar">
       <button class="uk-offcanvas-close" type="button" uk-close></button>
-      <ul class="uk-nav-primary uk-nav-parent-icon" uk-nav>
-        <li class="uk-parent">
-          <a href="#">${title}</a>
-          <ul class="uk-nav-sub">
-            <li> <a href="#poi/1"> Island 1 </a> </li>
-            <li> <a href="#poi/2"> Island 2 </a> </li>
-          </ul>
-        </li>
-      </ul>
+      <div repeat.for="coast of coasts">
+        <ul class="uk-nav-primary uk-nav-parent-icon" uk-nav>
+          <li class="uk-parent">
+            <a href="#">${coast.title}</a>
+            <ul class="uk-nav-sub">
+              <div repeat.for="poi of coast.pois">
+                <li><a href="#poi/${poi.safeName}"> ${poi.name}</a></a></li>
+              </div>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
