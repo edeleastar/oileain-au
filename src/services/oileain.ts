@@ -17,27 +17,14 @@ export class Oileain {
     this.http = http;
   }
 
-  getCoasts() {
-    if (this.coasts) {
-      return new Promise((resolve, reject) => {
-        resolve(this.coasts);
-      });
-    } else {
-      this.isRequesting = true;
-      return (
-        this.http
-          .fetch("https://edeleastar.github.io/oileain-api/all-slim.json")
-          .then(response => response.json())
-          .then(coasts => {
-            this.coasts = coasts;
-            this.createIndexes();
-            this.isRequesting = false;
-            return coasts;
-          })
-      );
+  async getCoasts() {
+    if (!this.coasts) {
+      const response  = await this.http.fetch("https://edeleastar.github.io/oileain-api/all-slim.json")
+      this.coasts = await response.json();
+      this.createIndexes();
     }
+    return this.coasts;
   }
-  k;
 
   getIsland(poi: PointOfInterest) {
     let cachedPoi = this.islandMap.get(poi.safeName);

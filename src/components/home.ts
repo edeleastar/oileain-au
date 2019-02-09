@@ -58,12 +58,8 @@ export class Home {
     }
   }
 
-  activate(params) {
-    console.log(params.zone);
-    this.oileain.getCoasts().then(coasts => {
-      this.coasts = coasts;
-      this.populateCoasts(coasts);
-    });
+  async activate(params) {
+    this.coasts = await this.oileain.getCoasts()
   }
 
   attached() {
