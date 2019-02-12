@@ -1,15 +1,29 @@
 <template>
   <div class="uk-flex uk-flex-center uk-flex-middle uk-text-center" uk-grid>
     <div class="uk-padding-small">
-      <a href="#offcanvas-push" uk-toggle title="Table of Contents" pos="bottom" uk-tooltip>
-        <i class="fas fa-bars fa-3x"> </i>
+      <a href="#offcanvas-push" uk-toggle title="Table of Contents" pos="bottom" uk-tooltip> <i class="fas fa-bars fa-3x"> </i>
       </a>
     </div>
-    <div class="uk-width-1-2@m  uk-card uk-card-default uk-padding-small">
-      <h2> ${title} </h2>
+    <!--<div class="uk-width-1-2@m  uk-card uk-card-default uk-padding-small">-->
+    <div class="uk-child-width-1-2@s uk-card uk-card-default uk-grid-collapse uk-text-center  uk-text-middle" uk-grid>
+      <div>
+        <div class="uk-tile uk-tile-default uk-padding-remove">
+          <h2> ${title} </h2>
+        </div>
+      </div>
+      <div>
+        <div class="uk-tile uk-tile-muted uk-padding-remove">
+          <p class="uk-text-small"> An experiment in exploring <a href="http://www.oileain.org/">David Walsh's Oileain</a>.
+            Prepared by Eamonn de Leastar </p></p>
+        </div>
+      </div>
     </div>
     <div class="uk-padding-small">
       <a href="#"> <i class="fas fa-map fa-3x"> </i> </a>
+    </div>
+    <div class="uk-padding-small">
+      <a href="http://www.oileain.org/"> <img data-src="http://www.oileain.org/wp-content/uploads/2015/05/oileain_2X.png"
+                                              width="70px" height="" alt="" uk-img> </a>
     </div>
   </div>
 </template>
