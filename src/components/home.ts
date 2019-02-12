@@ -7,15 +7,15 @@ import Marker = L.Marker;
 
 @inject(Oileain)
 export class Home {
-  title = "Olieain Main View";
+  title = 'Olieain Main View';
 
   mapDescriptor = {
-    id: "home-map-id",
+    id: 'home-map-id',
     height: 1200,
     location: { lat: 53.2734, long: -7.7783203 },
     zoom: 8,
     minZoom: 7,
-    activeLayer: ""
+    activeLayer: ''
   };
 
   map: LeafletMap;
@@ -29,18 +29,11 @@ export class Home {
   populateCoast(coast: Coast) {
     let group = L.layerGroup([]);
     coast.pois.forEach(poi => {
-      let marker = L.marker([
-        poi.coordinates.geo.lat,
-        poi.coordinates.geo.long
-      ]);
+      let marker = L.marker([poi.coordinates.geo.lat, poi.coordinates.geo.long]);
       var newpopup = L.popup({
         autoClose: false,
         closeOnClick: false
-      }).setContent(
-        `<a href='#/poi/${poi.safeName}'>${
-          poi.name
-        } <small>(click for details}</small></a>`
-      );
+      }).setContent(`<a href='#/poi/${poi.safeName}'>${poi.name} <small>(click for details}</small></a>`);
       marker.bindPopup(newpopup);
       marker.addTo(group);
     });
@@ -59,7 +52,7 @@ export class Home {
   }
 
   async activate(params) {
-    this.coasts = await this.oileain.getCoasts()
+    this.coasts = await this.oileain.getCoasts();
   }
 
   attached() {

@@ -19,6 +19,12 @@ export class App {
         moduleId: PLATFORM.moduleName('./components/poi-detail'),
         name: 'pois',
         title: 'Island'
+      },
+      {
+        route: 'navigator',
+        moduleId: PLATFORM.moduleName('./components/navigator'),
+        name: 'navigator',
+        title: 'Navigator'
       }
     ]);
   }
