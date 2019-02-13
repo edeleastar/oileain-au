@@ -18,7 +18,7 @@ export class Navigator {
 
   islandMapDescriptor = {
     id: 'island-map-id',
-    height: 200,
+    height: 250,
     location: { lat: 53.2734, long: -7.7783203 },
     zoom: 8,
     minZoom: 7,
