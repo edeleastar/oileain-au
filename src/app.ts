@@ -10,7 +10,7 @@ export class App {
     config.map([
       {
         route: [''],
-        moduleId: PLATFORM.moduleName('./components/home'),
+        moduleId: PLATFORM.moduleName('./components/navigator'),
         title: 'All Islands'
       },
       {
@@ -21,7 +21,7 @@ export class App {
       },
       {
         route: 'navigator',
-        moduleId: PLATFORM.moduleName('./components/navigator'),
+        moduleId: PLATFORM.moduleName('./components/home'),
         name: 'navigator',
         title: 'Navigator'
       }
