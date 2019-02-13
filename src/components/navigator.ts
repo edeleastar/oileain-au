@@ -31,6 +31,7 @@ export class Navigator {
   populated = false;
   markerMap = new Map<Marker, PointOfInterest>();
   poi: PointOfInterest;
+  poiSelected = false;
 
   constructor(private oileain: Oileain) {}
 
@@ -42,6 +43,7 @@ export class Navigator {
       this.islandMap.addPopup('Islands', this.poi.name, this.poi.coordinates.geo);
       this.islandMap.moveTo(15, this.poi.coordinates.geo);
       this.islandMap.invalidateSize();
+      this.poiSelected = true;
     }
   }
 

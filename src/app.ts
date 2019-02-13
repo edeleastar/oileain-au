@@ -3,7 +3,6 @@ import { Router, RouterConfiguration } from 'aurelia-router';
 
 export class App {
   title = 'Oileain';
-
   constructor() {}
 
   configureRouter(config: RouterConfiguration, router: Router) {

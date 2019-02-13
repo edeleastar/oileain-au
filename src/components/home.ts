@@ -4,6 +4,7 @@ import { inject } from 'aurelia-framework';
 import { Oileain } from "../services/oileain";
 import * as L from "leaflet";
 import Marker = L.Marker;
+import {App} from "../app";
 
 @inject(Oileain)
 export class Home {

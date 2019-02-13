@@ -8,12 +8,16 @@
     </div>
     <div class="uk-width-expand@m">
       <div id="${islandMapDescriptor.id}" style="height:${islandMapDescriptor.height}px"></div>
-      <div class="uk-card uk-card-default uk-card-body">
-        <poi-description poi.one-way="poi"></poi-description>
+      <div if.bind="poiSelected">
+        <div class="uk-card uk-card-default uk-card-body">
+          <poi-description poi.one-way="poi"></poi-description>
+        </div>
       </div>
     </div>
   </div>
-  <div class="uk-card uk-card-default uk-card-body">
-    <coordinates poi.one-way="poi"></coordinates>
+  <div if.bind="poiSelected">
+    <div class="uk-card uk-card-default uk-card-body">
+      <coordinates poi.one-way="poi"></coordinates>
+    </div>
   </div>
 </template>
