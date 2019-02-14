@@ -5,6 +5,7 @@ import LayersObject = L.Control.LayersObject;
 import { Geodetic } from './poi';
 import LayerGroup = L.LayerGroup;
 import LayerControl = L.Control.Layers;
+import {mapConfig} from '../../map-config';
 
 export interface LeafletMapDescriptor {
   id: string;
@@ -23,8 +24,8 @@ export class LeafletMap {
   mbAttr = `Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,
             <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>`;
 
-  mbUrl =
-    'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+  mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapConfig.leafletKey;
+  //mbUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
   baseLayers = {
     Terrain: L.tileLayer(this.mbUrl, {
