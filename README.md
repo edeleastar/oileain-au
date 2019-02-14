@@ -1,6 +1,9 @@
 # Oileain Open Maps
 
-An experiment in rendering maps of the Island of Ireland. Based on the book [Oileain](http://www.oileain.org/) by David Walsh
+An experiment in rendering maps of the Island of Ireland. Based on the book [Oileain](http://www.oileain.org/) by David Walsh. 
+The application is running here:
+
+- <https://edeleastar.github.io/oileain/>
 
 This application is implemented using the [Aurelia Framework](https://aurelia.io/). It relies the 
 the API hosted in this repository:
