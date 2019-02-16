@@ -1,0 +1,16 @@
+<template>
+  <div id="regions-menu" uk-offcanvas="flip: true">
+    <div class="uk-offcanvas-bar">
+      <button class="uk-offcanvas-close" type="button" uk-close></button>
+      <ul class="uk-nav uk-nav-default">
+        <div repeat.for="region of regions">
+          <li class="uk-parent">
+            <a href="#/region/${region.id}">${region.title}</a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</template>
+
+

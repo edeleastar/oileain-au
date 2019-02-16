@@ -5,6 +5,7 @@ import { Oileain } from "../services/oileain";
 import * as L from "leaflet";
 import Marker = L.Marker;
 import {App} from "../app";
+import {CoastalLeafletMap} from "../services/coastal-leaflet-map";
 
 @inject(Oileain)
 export class Home {
@@ -19,47 +20,19 @@ export class Home {
     activeLayer: ''
   };
 
-  map: LeafletMap;
-  populated = false;
-  markerMap = new Map<Marker, PointOfInterest>();
-
+  map: CoastalLeafletMap;
   coasts: Array<Coast>;
 
   constructor(private oileain: Oileain) {}
-
-  populateCoast(coast: Coast) {
-    let group = L.layerGroup([]);
-    coast.pois.forEach(poi => {
-      let marker = L.marker([poi.coordinates.geo.lat, poi.coordinates.geo.long]);
-      var newpopup = L.popup({
-        autoClose: false,
-        closeOnClick: false
-      }).setContent(`<a href='#/poi/${poi.safeName}'>${poi.name} <small>(click for details}</small></a>`);
-      marker.bindPopup(newpopup);
-      marker.addTo(group);
-    });
-    this.map.addLayer(coast.title, group);
-    this.map.control.addOverlay(group, coast.title);
-  }
-
-  populateCoasts(coasts: Array<Coast>) {
-    if (this.map && !this.populated) {
-      this.populated = true;
-      coasts.forEach(coast => {
-        this.populateCoast(coast);
-      });
-      this.map.invalidateSize();
-    }
-  }
 
   async activate(params) {
     this.coasts = await this.oileain.getCoasts();
   }
 
   attached() {
-    this.map = new LeafletMap(this.mapDescriptor);
+    this.map = new CoastalLeafletMap(this.mapDescriptor);
     if (this.coasts) {
-      this.populateCoasts(this.coasts);
+      this.map.populateCoasts(this.coasts);
     }
   }
 }

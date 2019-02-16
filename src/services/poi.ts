@@ -39,3 +39,9 @@ export interface Coast {
   geo: Geodetic;
   pois: Array<PointOfInterest>;
 }
+
+export interface Region {
+  title: string;
+  id: string;
+  location: Geodetic;
+}

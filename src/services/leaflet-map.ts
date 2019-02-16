@@ -2,7 +2,7 @@ import * as L from 'leaflet';
 import Map = L.Map;
 import Layer = L.Layer;
 import LayersObject = L.Control.LayersObject;
-import { Geodetic } from './poi';
+import {Coast, Geodetic} from './poi';
 import LayerGroup = L.LayerGroup;
 import LayerControl = L.Control.Layers;
 import {mapConfig} from '../../map-config';
@@ -34,6 +34,18 @@ export class LeafletMap {
     }),
     Satellite: L.tileLayer(this.mbUrl, {
       id: 'mapbox.satellite',
+      attribution: this.mbAttr
+    }),
+    Pencil: L.tileLayer(this.mbUrl, {
+      id: 'mapbox.pencil',
+      attribution: this.mbAttr
+    }),
+    HighContrast: L.tileLayer(this.mbUrl, {
+      id: 'mapbox.high-contrast',
+      attribution: this.mbAttr
+    }),
+    RunBikeHike: L.tileLayer(this.mbUrl, {
+      id: 'mapbox.run-bike-hike',
       attribution: this.mbAttr
     })
   };
@@ -88,7 +100,7 @@ export class LeafletMap {
       closeOnClick: false,
       closeButton: false
     })
-      .setLatLng({ lat: location.lat, lng: location.long })
+      .setLatLng({lat: location.lat, lng: location.long})
       .setContent(content);
     popup.addTo(popupGroup);
   }

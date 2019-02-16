@@ -1,16 +1,18 @@
 import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { Coast, PointOfInterest } from './poi';
+import {Coast, PointOfInterest, Region} from './poi';
 import { HttpClient } from 'aurelia-fetch-client';
 
 @inject(EventAggregator, HttpClient)
 export class Oileain {
   isRequesting = false;
   coasts: any[];
+  regions : any[];
   ea: EventAggregator;
   http: HttpClient;
   islandMap = new Map<string, PointOfInterest>();
   coastMap = new Map<string, Coast>();
+  regionMap = new Map<string, Region>();
 
   constructor(ea, http) {
     this.ea = ea;
@@ -24,6 +26,17 @@ export class Oileain {
       this.createIndexes();
     }
     return this.coasts;
+  }
+
+  async getRegions() {
+    if (!this.regions) {
+      const response = await this.http.fetch('https://edeleastar.github.io/oileain/regions.json');
+      this.regions = await response.json();
+      this.regions.forEach(region=>{
+        this.regionMap.set(region.id, region);
+      });
+    }
+    return this.regions;
   }
 
   async getIslandById(id: string) {

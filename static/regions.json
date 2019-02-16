@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Clew Bay",
+    "id": "clew-bay",
+    "location": {
+      "lat": 53.84450117,
+      "long": -9.66134868
+    }
+  },
+  {
+    "title": "Killary Harbour",
+    "id": "killary-harbour",
+    "location": {
+      "lat": 53.63946304,
+      "long": -9.91335996
+    }
+  },
+  {
+    "title": "The Saltees",
+    "id": "saltees",
+    "location": {
+      "lat": 52.14031776,
+      "long": -6.58976231
+    }
+  }
+]
+

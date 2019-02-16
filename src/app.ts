@@ -24,6 +24,12 @@ export class App {
         moduleId: PLATFORM.moduleName('./components/home'),
         name: 'navigator',
         title: 'Navigator'
+      },
+      {
+        route: 'region/:id',
+        moduleId: PLATFORM.moduleName('./components/navigator'),
+        name: 'region',
+        title: 'Region'
       }
     ]);
   }

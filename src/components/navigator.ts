@@ -4,9 +4,10 @@ import { inject } from 'aurelia-framework';
 import { Oileain } from '../services/oileain';
 import * as L from 'leaflet';
 import Marker = L.Marker;
+import {CoastalLeafletMap, PoiSelect} from "../services/coastal-leaflet-map";
 
 @inject(Oileain)
-export class Navigator {
+export class Navigator implements PoiSelect {
   mainMapDescriptor = {
     id: 'home-map-id',
     height: 650,
@@ -25,67 +26,46 @@ export class Navigator {
     activeLayer: 'Satellite'
   };
 
-  mainMap: LeafletMap;
+  mainMap: CoastalLeafletMap;
   islandMap: LeafletMap;
   coasts: Array<Coast>;
-  populated = false;
-  markerMap = new Map<Marker, PointOfInterest>();
   poi: PointOfInterest;
   poiSelected = false;
+  id : string;
 
   constructor(private oileain: Oileain) {}
 
-  async onClick(markerEvent) {
-    const marker = markerEvent.popup._source;
-    const shortPoi = this.markerMap.get(marker);
-    this.poi = await this.oileain.getIslandById(shortPoi.safeName);
+  moveToRegion(regionId:string) {
+    this.mainMap.moveTo(12, this.oileain.regionMap.get(regionId).location);
+  }
+
+  async activate(params) {
+    this.coasts = await this.oileain.getCoasts();
+    this.id = params.id
+    if (this.id && this.mainMap) {
+      this.moveToRegion(this.id);
+    }
+  }
+
+  attached() {
+    this.mainMap = new CoastalLeafletMap(this.mainMapDescriptor);
+    this.islandMap = new LeafletMap(this.islandMapDescriptor);
+    if (this.id) {
+      this.moveToRegion(this.id);
+      this.id = "";
+    }
+    if (this.coasts) {
+      this.mainMap.populateCoasts(this.coasts, false, this);
+    }
+  }
+
+  async onSelect(id: string) {
+    this.poi = await this.oileain.getIslandById(id);
     if (this.islandMap) {
       this.islandMap.addPopup('Islands', this.poi.name, this.poi.coordinates.geo);
       this.islandMap.moveTo(15, this.poi.coordinates.geo);
       this.islandMap.invalidateSize();
       this.poiSelected = true;
-    }
-  }
-
-  populateCoast(coast: Coast) {
-    let group = L.layerGroup([]);
-    coast.pois.forEach(poi => {
-      let marker = L.marker([poi.coordinates.geo.lat, poi.coordinates.geo.long]);
-      this.markerMap.set(marker, poi);
-      var newpopup = L.popup({
-        autoClose: true,
-        closeOnClick: false
-      }).setContent(`${poi.name}`);
-      marker.bindPopup(newpopup);
-      marker.addTo(group);
-      marker.addTo(group).on('popupopen', event => {
-        this.onClick(event);
-      });
-    });
-
-    this.mainMap.addLayer(coast.title, group);
-    this.mainMap.control.addOverlay(group, coast.title);
-  }
-
-  populateCoasts(coasts: Array<Coast>) {
-    if (this.mainMap && !this.populated) {
-      this.populated = true;
-      coasts.forEach(coast => {
-        this.populateCoast(coast);
-      });
-      this.mainMap.invalidateSize();
-    }
-  }
-
-  async activate(params) {
-    this.coasts = await this.oileain.getCoasts();
-  }
-
-  attached() {
-    this.mainMap = new LeafletMap(this.mainMapDescriptor);
-    this.islandMap = new LeafletMap(this.islandMapDescriptor);
-    if (this.coasts) {
-      this.populateCoasts(this.coasts);
     }
   }
 }
